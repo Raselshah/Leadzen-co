@@ -2,56 +2,51 @@ import React, { useState } from "react";
 import UserData from "../UserData/UserData";
 
 const UserTable = ({ userData }) => {
-  //   const [userDetails, setUserDetails] = useState("");
   const [selected, setSelected] = useState(null);
   const handleShowBtn = (id) => {
-    if (selected === id) {
+    if (selected == id) {
       return setSelected(null);
     }
     setSelected(id);
   };
   return (
     <div className="">
-      <div class="overflow-x-auto">
-        {userData.map((user) => (
-          <>
-            <table class="table w-full border-2 rounded-full">
+      {userData?.map((user) => (
+        <>
+          <div class="overflow-x-auto">
+            <table class="table w-full border-2 rounded-full pb-8">
               <tbody>
                 <tr className="">
-                  <td>{user?.company_name}</td>
-                  <td>
-                    Zemlak
+                  <td className="w-full mx-auto">{user?.name}</td>
+                  <td className="w-full">
+                    Height
                     <br />
-                    <span class="badge badge-ghost badge-sm">
-                      Desktop Support Technician
+                    <span class="text-sm badge badge-ghost badge-sm">
+                      {user?.height}
                     </span>
                   </td>
-                  <td>
-                    Zemlak
+                  <td className="w-full">
+                    Gender
                     <br />
-                    <span class="badge badge-ghost badge-sm">
-                      Desktop Support Technician
-                    </span>
+                    <span class="text-sm">{user?.gender}</span>
+                  </td>
+                  <td className="w-full">
+                    Date of Birth
+                    <br />
+                    <span class="text-sm">{user?.birth_year}</span>
                   </td>
                   <td>
-                    Zemlak
-                    <br />
-                    <span class="badge badge-ghost badge-sm">
-                      Desktop Support Technician
-                    </span>
-                  </td>
-                  <td>
-                    {selected === user.id ? (
+                    {selected == user?.name ? (
                       <button
-                        onClick={() => handleShowBtn(user.id)}
-                        className="btn btn-xs border-0 bg-orange-600"
+                        onClick={() => handleShowBtn(user?.name)}
+                        className="btn btn-xs border-0 bg-gray-600"
                       >
                         hide details
                       </button>
                     ) : (
                       <button
-                        onClick={() => handleShowBtn(user.id)}
-                        className="btn btn-xs border-0 bg-orange-600"
+                        onClick={() => handleShowBtn(user?.name)}
+                        className="btn btn-xs border-0 bg-orange-600 hover:bg-orange-600"
                       >
                         view details
                       </button>
@@ -60,16 +55,16 @@ const UserTable = ({ userData }) => {
                 </tr>
               </tbody>
             </table>
-            {selected === user.id ? (
+            {selected == user?.name ? (
               <>
-                <UserData />
+                <UserData filterData={selected} />
               </>
             ) : (
               ""
             )}
-          </>
-        ))}
-      </div>
+          </div>
+        </>
+      ))}
     </div>
   );
 };

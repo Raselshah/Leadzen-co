@@ -5,17 +5,17 @@ const axios = require("axios").default;
 
 function App() {
   const [userData, setUserData] = useState([]);
+
   axios
-    .get("https://jsonplaceholder.typicode.com/todos")
+    .get("https://swapi.dev/api/people/?format=json")
     .then((res) => setUserData(res.data));
-  // console.log(userData);
 
   return (
     <div className="max-w-screen-lg mx-auto bg-gray-200 p-6 mt-16">
       <h2 className="text-center text-3xl text-orange-600 m-4">
         Welcome Leadzen employer
       </h2>
-      <UserTable userData={userData} />
+      <UserTable userData={userData?.results} />
 
       <div class="btn-group flex justify-center mt-6">
         <button class="btn">1</button>
