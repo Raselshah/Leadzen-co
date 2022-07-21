@@ -6,9 +6,9 @@ const axios = require("axios").default;
 function App() {
   const [userData, setUserData] = useState([]);
   axios
-    .get("https://leadzen-dev.analystt.ai/api/sme_companies/react_challenge")
+    .get("https://jsonplaceholder.typicode.com/todos")
     .then((res) => setUserData(res.data));
-  console.log(userData);
+  // console.log(userData);
 
   return (
     <div className="max-w-screen-lg mx-auto bg-gray-200 p-6 mt-16">
