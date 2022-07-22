@@ -2,17 +2,26 @@ import React, { useEffect, useState } from "react";
 
 const UserData = ({ filterData }) => {
   const [detailsUser, setDetailsUser] = useState({});
+  const [dataLoading, setDataLoading] = useState(false);
   useEffect(() => {
-    fetch("https://swapi.dev/api/people/?format=json")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        const findUser = data.results?.filter(
-          (result) => result?.name == filterData
-        );
-        setDetailsUser(findUser);
-      });
+    const findUser = async () => {
+      setDataLoading(true);
+      await fetch("https://swapi.dev/api/people/?format=json")
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          const findUser = data.results?.filter(
+            (result) => result?.name == filterData
+          );
+          setDetailsUser(findUser);
+          setDataLoading(false);
+        });
+    };
+    findUser();
   }, [filterData]);
+  if (dataLoading) {
+    return <p className="text-center text-sky-500">loading..</p>;
+  }
   return (
     <div>
       <div class="card w-full bg-base-100 shadow-xl">

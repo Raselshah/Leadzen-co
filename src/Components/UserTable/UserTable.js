@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import Loading from "../Loading/Loading";
 import UserData from "../UserData/UserData";
 
-const UserTable = ({ userData }) => {
+const UserTable = ({ currentData, loading }) => {
   const [selected, setSelected] = useState(null);
   const handleShowBtn = (id) => {
     if (selected == id) {
@@ -9,9 +10,12 @@ const UserTable = ({ userData }) => {
     }
     setSelected(id);
   };
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <div className="">
-      {userData?.map((user) => (
+      {currentData?.map((user) => (
         <>
           <div class="overflow-x-auto">
             <table class="table w-full border-2 rounded-full pb-8">
